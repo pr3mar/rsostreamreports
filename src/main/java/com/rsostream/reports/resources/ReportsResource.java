@@ -52,6 +52,20 @@ public class ReportsResource {
     }
 
     @GET
+    @Path("/fib/{n}")
+    public Response getFib(@PathParam("n") int n) {
+        return Response.ok(fib(n)).build();
+    }
+
+    private long fib(int n) {
+        if (n <= 1) {
+            return n;
+        } else {
+            return fib(n - 1) + fib(n - 2);
+        }
+    }
+
+    @GET
     @Path("/device/{imei}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
