@@ -42,8 +42,10 @@ public class DeviceReport {
         this.imei = imei;
         this.numberOfReadings = readingList.size();
         this.readingList = readingList;
-        this.dateTo = readingList.stream().map(u -> u.getTimeObtained()).max(Date::compareTo).get();
-        this.dateFrom = readingList.stream().map(u -> u.getTimeObtained()).min(Date::compareTo).get();
+        if(readingList.size() > 0) {
+            this.dateTo = readingList.stream().map(SensorReading::getTimeObtained).max(Date::compareTo).get();
+            this.dateFrom = readingList.stream().map(SensorReading::getTimeObtained).min(Date::compareTo).get();
+        }
     }
 
     public ObjectId getId() {
